@@ -1,0 +1,50 @@
+transactions_data = [
+    {
+        "reference": "000051",
+        "account": "C00099",
+        "date": "2020-01-03",
+        "amount": "-51.13",
+        "type": "outflow",
+        "category": "groceries",
+    },
+    {
+        "reference": "000052",
+        "account": "C00099",
+        "date": "2020-01-10",
+        "amount": "2500.72",
+        "type": "inflow",
+        "category": "salary",
+    },
+    {
+        "reference": "000053",
+        "account": "C00099",
+        "date": "2020-01-10",
+        "amount": "-150.72",
+        "type": "outflow",
+        "category": "transfer",
+    },
+    {
+        "reference": "000054",
+        "account": "C00099",
+        "date": "2020-01-13",
+        "amount": "-560.00",
+        "type": "outflow",
+        "category": "rent",
+    },
+    {
+        "reference": "000051",
+        "account": "C00099",
+        "date": "2020-01-04",
+        "amount": "-51.13",
+        "type": "outflow",
+        "category": "other",
+    },
+    {
+        "reference": "000689",
+        "account": "S00012",
+        "date": "2020-01-10",
+        "amount": "150.72",
+        "type": "inflow",
+        "category": "savings",
+    }
+]

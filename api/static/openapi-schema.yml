@@ -1,0 +1,313 @@
+openapi: 3.0.2
+info:
+  title: 'User Transactions'
+  description: "An API for user's transactions"
+  version: '1.0.0'
+paths:
+  /api/users/:
+    get:
+      operationId: listUsers
+      description: ''
+      parameters: []
+      responses:
+        '200':
+          content:
+            application/json:
+              schema:
+                type: array
+                items:
+                  $ref: '#/components/schemas/User'
+          description: ''
+      tags:
+      - api
+    post:
+      operationId: createUser
+      description: ''
+      parameters: []
+      requestBody:
+        content:
+          application/json:
+            schema:
+              $ref: '#/components/schemas/User'
+          application/x-www-form-urlencoded:
+            schema:
+              $ref: '#/components/schemas/User'
+          multipart/form-data:
+            schema:
+              $ref: '#/components/schemas/User'
+      responses:
+        '201':
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/User'
+          description: ''
+      tags:
+      - api
+  /api/users/{id}/:
+    get:
+      operationId: retrieveUser
+      description: ''
+      parameters:
+      - name: id
+        in: path
+        required: true
+        description: A unique integer value identifying this user.
+        schema:
+          type: string
+      responses:
+        '200':
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/User'
+          description: ''
+      tags:
+      - api
+    put:
+      operationId: updateUser
+      description: ''
+      parameters:
+      - name: id
+        in: path
+        required: true
+        description: A unique integer value identifying this user.
+        schema:
+          type: string
+      requestBody:
+        content:
+          application/json:
+            schema:
+              $ref: '#/components/schemas/User'
+          application/x-www-form-urlencoded:
+            schema:
+              $ref: '#/components/schemas/User'
+          multipart/form-data:
+            schema:
+              $ref: '#/components/schemas/User'
+      responses:
+        '200':
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/User'
+          description: ''
+      tags:
+      - api
+    patch:
+      operationId: partialUpdateUser
+      description: ''
+      parameters:
+      - name: id
+        in: path
+        required: true
+        description: A unique integer value identifying this user.
+        schema:
+          type: string
+      requestBody:
+        content:
+          application/json:
+            schema:
+              $ref: '#/components/schemas/User'
+          application/x-www-form-urlencoded:
+            schema:
+              $ref: '#/components/schemas/User'
+          multipart/form-data:
+            schema:
+              $ref: '#/components/schemas/User'
+      responses:
+        '200':
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/User'
+          description: ''
+      tags:
+      - api
+    delete:
+      operationId: destroyUser
+      description: ''
+      parameters:
+      - name: id
+        in: path
+        required: true
+        description: A unique integer value identifying this user.
+        schema:
+          type: string
+      responses:
+        '204':
+          description: ''
+      tags:
+      - api
+  /api/users/{id}/summary-by-account/:
+    get:
+      operationId: summaryByAccountUser
+      description: ''
+      parameters:
+      - name: id
+        in: path
+        required: true
+        description: A unique integer value identifying this user.
+        schema:
+          type: string
+      responses:
+        '200':
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/User'
+          description: ''
+      tags:
+      - api
+  /api/users/{id}/summary-by-category/:
+    get:
+      operationId: summaryByCategoryUser
+      description: ''
+      parameters:
+      - name: id
+        in: path
+        required: true
+        description: A unique integer value identifying this user.
+        schema:
+          type: string
+      responses:
+        '200':
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/User'
+          description: ''
+      tags:
+      - api
+  /api/users/{id}/transactions/:
+    post:
+      operationId: transactionsUser
+      description: ''
+      parameters:
+      - name: id
+        in: path
+        required: true
+        description: A unique integer value identifying this user.
+        schema:
+          type: string
+      requestBody:
+        content:
+          application/json:
+            schema:
+              $ref: '#/components/schemas/Transaction'
+          application/x-www-form-urlencoded:
+            schema:
+              $ref: '#/components/schemas/Transaction'
+          multipart/form-data:
+            schema:
+              $ref: '#/components/schemas/Transaction'
+      responses:
+        '200':
+          content:
+          description: ''
+      tags:
+      - api
+components:
+  schemas:
+    Transaction:
+      type: array
+      items:
+          type: object
+          properties:
+            reference:
+              type: string
+              maxLength: 10
+            type:
+              enum:
+              - inflow
+              - outflow
+              type: string
+            category:
+              enum:
+              - groceries
+              - transfer
+              - salary
+              - rent
+              - other
+              - savings
+              type: string
+            account:
+              type: string
+              maxLength: 10
+            date:
+              type: string
+              format: date
+            amount:
+              type: string
+              format: decimal
+              multipleOf: 0.01
+              maximum: 1000000
+              minimum: -1000000
+          required:
+          - reference
+          - type
+          - category
+          - account
+          - date
+          - amount
+    User:
+      type: object
+      properties:
+        id:
+          type: integer
+          readOnly: true
+        name:
+          type: string
+          maxLength: 200
+        email:
+          type: string
+          format: email
+          maxLength: 254
+        age:
+          type: integer
+        transactions:
+          type: array
+          items:
+            type: object
+            properties:
+              reference:
+                type: string
+                maxLength: 10
+              type:
+                enum:
+                - inflow
+                - outflow
+                type: string
+              category:
+                enum:
+                - groceries
+                - transfer
+                - salary
+                - rent
+                - other
+                - savings
+                type: string
+              account:
+                type: string
+                maxLength: 10
+              date:
+                type: string
+                format: date
+              amount:
+                type: string
+                format: decimal
+                multipleOf: 0.01
+                maximum: 1000000
+                minimum: -1000000
+            required:
+            - reference
+            - type
+            - category
+            - account
+            - date
+            - amount
+          readOnly: true
+      required:
+      - name
+      - email
+      - age
